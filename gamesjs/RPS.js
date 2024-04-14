@@ -19,18 +19,24 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function updateScores() {
+    document.getElementById('score').textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
+}
+
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', () => {
         const playerSelection = button.id.charAt(0).toUpperCase() + button.id.slice(1);
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
         document.getElementById('result').textContent = result;
-        document.getElementById('score').textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
+        updateScores();
         if (playerScore === 5 || computerScore === 5) {
             const winner = playerScore === 5 ? 'Player' : 'Computer';
             document.getElementById('result').textContent = `Game over, ${winner} wins!`;
             playerScore = 0;
             computerScore = 0;
+            updateScores();  // Ensure score resets are reflected in the display
         }
     });
 });
+

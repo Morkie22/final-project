@@ -1,71 +1,76 @@
-// Variables to store calculator state
-let displayValue = '0'; // Current display value
-let firstOperand = null; // First operand for any expression
-let secondOperand = null; // Second operand for any expression
-let currentOperation = null; // Current operation in use
+// Initialization of variables
+let displayValue = '0';
+let firstOperand = null;
+let secondOperand = null;
+let currentOperation = null;
 
-// Updates the display with the current display value
+// Function to update the calculator display
 function updateDisplay() {
     document.querySelector('#display').textContent = displayValue;
 }
 
-// Handles number and decimal input
+// Function to handle number and decimal inputs
 function pressNum(num) {
-    if (num === '.' && displayValue.includes('.')) return; // Prevent multiple decimals
-    if (num === '-' && displayValue === '0') {
-        displayValue = '-'; // Allows for negative number input
+    if (num === '.' && displayValue.includes('.')) return;  // Prevent multiple decimals
+    if (displayValue === '0' || currentOperation && secondOperand === null) {
+        displayValue = num;
     } else {
-        displayValue = (displayValue === '0' || displayValue === '-') ? num : displayValue + num;
+        displayValue += num;
     }
-    updateDisplay(); // Update display after pressing a number
+    updateDisplay();
 }
 
-// Sets the current operation and first operand
+// Function to set the current operation and handle chaining of operations
 function setOperation(operator) {
-    if (currentOperation !== null && displayValue !== '-') operate();
-    if (displayValue === '-') return; // Do nothing if only '-' is entered
-    firstOperand = parseFloat(displayValue);
+    if (currentOperation && secondOperand === null) {
+        displayValue = '0';  // Prepare to receive the second operand
+    } else if (currentOperation) {
+        operate();  // Calculate result with the previous operation before setting the new operation
+    }
+    firstOperand = parseFloat(displayValue);  // Set the first operand
     currentOperation = operator;
-    displayValue = '';
+    secondOperand = null;  // Reset second operand
+    displayValue = '0';  // Clear display for new number input
 }
 
-// Performs the calculation based on the current operation
+// Function to perform calculation and update the display
 function operate() {
-    if (currentOperation === null || displayValue === '' || displayValue === '-') return;
+    if (!currentOperation || displayValue === '-') return;  // Do nothing if operation is incomplete or only '-' is entered
     secondOperand = parseFloat(displayValue);
     if (currentOperation === '/' && secondOperand === 0) {
         displayValue = "Error: Divide by zero";
     } else {
-        displayValue = String(performCalculation(firstOperand, secondOperand, currentOperation));
+        displayValue = performCalculation(firstOperand, secondOperand, currentOperation).toString();
     }
-    updateDisplay(); // Update display after calculation
-    firstOperand = parseFloat(displayValue); // Ready for next operation
+    updateDisplay();
+    firstOperand = parseFloat(displayValue);  // Prepare for next operation
     currentOperation = null;
+    secondOperand = null;
 }
 
-// Calculates the result based on operation
+// Function to calculate result based on operation type
 function performCalculation(a, b, operation) {
     switch (operation) {
         case '+': return a + b;
         case '-': return a - b;
         case '*': return a * b;
         case '/': return a / b;
-        default: return b; // Return second operand if no operation is set
     }
 }
 
-// Resets the calculator display and state
+// Function to clear calculator display and reset all states
 function clearDisplay() {
     displayValue = '0';
     firstOperand = null;
     currentOperation = null;
-    updateDisplay(); // Clear and update the display
+    secondOperand = null;
+    updateDisplay();
 }
 
 // Adding keyboard support
 document.addEventListener('keydown', function(e) {
-    if ((e.key >= '0' && e.key <= '9') || e.key === '.') pressNum(e.key); // Handle number keys and decimal
-    if (e.key === 'Enter' || e.key === '=') operate(); // Execute calculation on 'Enter' or '='
-    if (e.key === 'Escape' || e.key === 'Delete') clearDisplay(); // Clear display on 'Escape' or 'Delete'
-    if (['+', '-', '*', '/'].includes(e.key)) setOperation(e.key); // Handle operation keys
+    if ((e.key >= '0' && e.key <= '9') || e.key === '.') pressNum(e.key);
+    if (e.key === 'Enter' || e.key === '=') operate();
+    if (e.key === 'Escape' || e.key === 'Delete') clearDisplay();
+    if (['+', '-', '*', '/'].includes(e.key)) setOperation(e.key);
 });
