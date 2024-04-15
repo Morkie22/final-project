@@ -26,11 +26,18 @@ body {
     border-radius: 5px;
 }
 
+.button-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 button {
     width: 25%;
     padding: 10px 0;
     margin: 5px 0;
     border: none;
+    border-radius: 0%;
     background-color: #f0f0f0;
     font-size: 1.2em;
     cursor: pointer;
@@ -41,12 +48,29 @@ button:hover {
     background-color: #dcdcdc;
 }
 
-.button-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.clearBtn {
+    color: red;
+    font-weight: bold;
 }
 
-button:nth-child(1) {
-    flex-grow: 2;
+.backBtn {}
+
+.topBtn {
+    margin-left: auto;
+}
+
+.mathBtn {
+    color: #0067C0;
+    font-size: 1.7em;
+}
+
+.opBtn {
+    color: #e0e0e0;
+    background-color: #0067C0;
+    font-size: 1.7em;
+}
+
+.opBtn:hover {
+    color: #0067C0;
+    background-color: #e0e0e0;
 }
