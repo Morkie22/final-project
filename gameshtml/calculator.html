@@ -10,32 +10,33 @@
     <main id="calculator">
         <header id="display">0</header>
         <section class="button-section">
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="setOperation('/')">÷</button>
-            <button onclick="setOperation('*')">×</button>
-            <button onclick="setOperation('-')">-</button>
+            <button class="clearBtn" onclick="clearDisplay()">C</button>
+            <button class="backBtn" onclick="setOperation('')">B</button>
+            <button class="mathBtn topBtn" onclick="setOperation('/')">÷</button>
         </section>
         <section class="button-section">
             <button onclick="pressNum('7')">7</button>
             <button onclick="pressNum('8')">8</button>
             <button onclick="pressNum('9')">9</button>
-            <button onclick="setOperation('+')">+</button>
+            <button class="mathBtn" onclick="setOperation('*')">×</button>
         </section>
         <section class="button-section">
             <button onclick="pressNum('4')">4</button>
             <button onclick="pressNum('5')">5</button>
             <button onclick="pressNum('6')">6</button>
-            <button onclick="pressNum('.')">.</button>
+            <button class="mathBtn" onclick="setOperation('-')">-</button>
         </section>
         <section class="button-section">
             <button onclick="pressNum('1')">1</button>
             <button onclick="pressNum('2')">2</button>
             <button onclick="pressNum('3')">3</button>
-            <button onclick="operate()">=</button>
+            <button class="mathBtn" onclick="setOperation('+')">+</button>
         </section>
         <section class="button-section">
-            <button onclick="pressNum('0')" style="flex-grow: 2;">0</button>
             <button onclick="pressNum('-')">+/-</button>
+            <button onclick="pressNum('0')">0</button>
+            <button onclick="pressNum('.')">.</button>
+            <button class="opBtn" onclick="operate()">=</button>
         </section>
     </main>
 <script src="../gamesjs/calculator.js"></script>

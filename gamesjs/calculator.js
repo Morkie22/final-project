@@ -12,10 +12,10 @@ function updateDisplay() {
 // Function to handle number and decimal inputs
 function pressNum(num) {
     if (num === '.' && displayValue.includes('.')) return;  // Prevent multiple decimals
-    if (displayValue === '0' || currentOperation && secondOperand === null) {
-        displayValue = num;
-    } else {
+    if (displayValue !== '0' || currentOperation && secondOperand !== null) {
         displayValue += num;
+    } else {
+        displayValue = num;
     }
     updateDisplay();
 }
