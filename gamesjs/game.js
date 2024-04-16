@@ -98,6 +98,7 @@ function update(currentTime) {
   clearCanvas();
 
   ground.update(gameSpeed, timeDelta);
+  player.update(gameSpeed, timeDelta);
 
   ground.draw();
   player.draw();

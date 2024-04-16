@@ -1,4 +1,8 @@
 export default class Player {
+  RUN_ANIMATION_FRAMERATE = 200;
+  runAnimationFrameCount = this.RUN_ANIMATION_FRAMERATE;
+  playerRunImages = [];
+
   constructor(
     context,
     width,
@@ -21,6 +25,30 @@ export default class Player {
     this.idleImage = new Image();
     this.idleImage.src = "../Images/player-idle.png";
     this.image = this.idleImage;
+
+    const playerRunImage1 = new Image();
+    playerRunImage1.src = "../Images/player-run-0.png";
+    const playerRunImage2 = new Image();
+    playerRunImage2.src = "../Images/player-run-1.png";
+
+    this.playerRunImages.push(playerRunImage1);
+    this.playerRunImages.push(playerRunImage2);
+  }
+
+  update(gameSpeed, timeDelta) {
+    this.run(gameSpeed, timeDelta);
+  }
+
+  run(gameSpeed, timeDelta) {
+    if (this.runAnimationFrameCount <= 0) {
+      if (this.image === this.playerRunImages[0]) {
+        this.image = this.playerRunImages[1];
+      } else {
+        this.image = this.playerRunImages[0];
+      }
+      this.runAnimationFrameCount = this.RUN_ANIMATION_FRAMERATE;
+    }
+    this.runAnimationFrameCount -= timeDelta * gameSpeed;
   }
 
   draw() {
