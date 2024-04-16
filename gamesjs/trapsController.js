@@ -60,9 +60,15 @@ export default class TrapsController {
     this.traps.forEach((trap) => {
       trap.update(this.speed, gameSpeed, timeDelta, this.scaleRatio);
     });
+
+    this.traps = this.traps.filter((trap) => trap.x > -trap.width);
   }
 
   draw() {
     this.traps.forEach((trap) => trap.draw());
+  }
+
+  collideWith(sprite) {
+    return this.traps.some((trap) => trap.collideWith(sprite));
   }
 }

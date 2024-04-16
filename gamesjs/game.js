@@ -30,6 +30,7 @@ let trapsController = null;
 let scaleRatio = null;
 let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
+let isGameOver = false;
 
 function createSprites() {
   const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
@@ -109,6 +110,15 @@ function clearCanvas() {
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function showGameOver() {
+  const fontSize = 70 * scaleRatio;
+  context.font = `${fontSize}px Verdana`;
+  context.fillStyle = "grey";
+  const x = canvas.width / 4.5;
+  const y = canvas.height / 2;
+  context.fillText("Game Over", x, y);
+}
+
 function update(currentTime) {
   if (previousTime === null) {
     previousTime = currentTime;
@@ -121,13 +131,23 @@ function update(currentTime) {
 
   clearCanvas();
 
-  ground.update(gameSpeed, timeDelta);
-  trapsController.update(gameSpeed, timeDelta);
-  player.update(gameSpeed, timeDelta);
+  if (!isGameOver) {
+    ground.update(gameSpeed, timeDelta);
+    trapsController.update(gameSpeed, timeDelta);
+    player.update(gameSpeed, timeDelta);
+  }
+
+  if (!isGameOver && trapsController.collideWith(player)) {
+    isGameOver = true;
+  }
 
   ground.draw();
   trapsController.draw();
   player.draw();
+
+  if (isGameOver) {
+    showGameOver();
+  }
 
   requestAnimationFrame(update);
 }
