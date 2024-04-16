@@ -31,6 +31,7 @@ let scaleRatio = null;
 let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
 let isGameOver = false;
+let hasEventListenersForRestart = false;
 
 function createSprites() {
   const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
@@ -119,6 +120,24 @@ function showGameOver() {
   context.fillText("Game Over", x, y);
 }
 
+function setupGameReset() {
+  if (!hasEventListenersForRestart) {
+    hasEventListenersForRestart = true;
+
+    setTimeout(() => {
+      window.addEventListener("keyup", reset, { once: true });
+    }, 1000);
+  }
+}
+
+function reset() {
+  hasEventListenersForRestart = false;
+  isGameOver = false;
+  ground.reset();
+  trapsController.reset();
+  gameSpeed = GAME_SPEED_START;
+}
+
 function update(currentTime) {
   if (previousTime === null) {
     previousTime = currentTime;
@@ -139,6 +158,7 @@ function update(currentTime) {
 
   if (!isGameOver && trapsController.collideWith(player)) {
     isGameOver = true;
+    setupGameReset();
   }
 
   ground.draw();

@@ -71,4 +71,8 @@ export default class TrapsController {
   collideWith(sprite) {
     return this.traps.some((trap) => trap.collideWith(sprite));
   }
+
+  reset() {
+    this.traps = [];
+  }
 }
