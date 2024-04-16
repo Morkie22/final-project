@@ -6,8 +6,10 @@ export default class Player {
   isJumpPressed = false;
   isJumpInProgress = false;
   isFalling = false;
-  JUMP_SPEED = 0.6;
-  GRAVITY = 0.4;
+
+  JUMP_SPEED = 0.55;
+  GRAVITY = 0.0015;
+  yVelocity = 0;
 
   constructor(
     context,
@@ -29,6 +31,8 @@ export default class Player {
     this.y = this.canvas.height - this.height - 1.5 * scaleRatio;
     this.playerStandingPositionY = this.y;
 
+    this.isJumping = false;
+
     this.idleImage = new Image();
     this.idleImage.src = "../Images/player-idle.png";
     this.image = this.idleImage;
@@ -41,37 +45,39 @@ export default class Player {
     this.playerRunImages.push(playerRunImage1);
     this.playerRunImages.push(playerRunImage2);
 
-    // Controls
-    window.removeEventListener("keydown", this.keydown);
-    window.removeEventListener("keyup", this.keyup);
+    window.removeEventListener("keydown", this.onJumpKeyDown);
+    window.removeEventListener("keyup", this.onJumpKeyUp);
 
-    window.addEventListener("keydown", this.keydown);
-    window.addEventListener("keyup", this.keyup);
+    window.addEventListener("keydown", this.onJumpKeyDown);
+    window.addEventListener("keyup", this.onJumpKeyUp);
   }
 
-  keydown = (event) => {
-    if (event.code === "Space") {
-      this.isJumpPressed = true;
-    }
+  onJumpKeyDown = (event) => {
+    if (event.code !== "Space" || this.isJumping) return;
+
+    this.yVelocity = this.JUMP_SPEED;
+    this.isJumping = true;
   };
 
-  keyup = (event) => {
+  onJumpKeyUp = (event) => {
     if (event.code === "Space") {
       this.isJumpPressed = false;
+      if (this.yVelocity > 0) {
+        this.yVelocity = 0;
+      }
     }
   };
 
   update(gameSpeed, timeDelta) {
-    this.run(gameSpeed, timeDelta);
+    this.handleRun(gameSpeed, timeDelta);
 
     if (this.isJumpInProgress) {
       this.image = this.idleImage;
     }
-
-    this.jump(timeDelta);
+    this.handleJump(timeDelta);
   }
 
-  run(gameSpeed, timeDelta) {
+  handleRun(gameSpeed, timeDelta) {
     if (this.runAnimationFrameCount <= 0) {
       if (this.image === this.playerRunImages[0]) {
         this.image = this.playerRunImages[1];
@@ -83,30 +89,15 @@ export default class Player {
     this.runAnimationFrameCount -= timeDelta * gameSpeed;
   }
 
-  jump(timeDelta) {
-    if (this.isJumpPressed) {
-      this.isJumpInProgress = true;
-    }
-
-    if (this.isJumpInProgress && !this.isFalling) {
-      if (
-        this.y > this.canvas.height - this.minJumpHeight ||
-        (this.y > this.canvas.height - this.maxJumpHeight && this.isJumpPressed)
-      ) {
-        this.y -= this.JUMP_SPEED * timeDelta * this.scaleRatio;
-      } else {
-        this.isFalling = true;
-      }
+  handleJump(timeDelta) {
+    if (!this.isJumping) return;
+    if (this.y + this.height > this.canvas.height) {
+      this.y = this.playerStandingPositionY;
+      this.isJumping = false;
+      this.yVelocity = 0;
     } else {
-      if (this.y < this.playerStandingPositionY) {
-        this.y += this.GRAVITY * timeDelta * this.scaleRatio;
-        if (this.y + this.height > this.canvas.height) {
-          this.y = this.playerStandingPositionY;
-        }
-      } else {
-        this.isFalling = false;
-        this.isJumpInProgress = false;
-      }
+      this.y -= this.yVelocity * timeDelta * this.scaleRatio;
+      this.yVelocity -= this.GRAVITY * timeDelta;
     }
   }
 
