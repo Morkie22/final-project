@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+}
+
+body {
+    margin: 20vh auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #535353;
+}
+
+#gameContainer {
+    width: 80vw;
+    height: 30vh;
+    border: 5px solid #C8C8C8;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+#score {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+}
