@@ -1,3 +1,5 @@
+import Trap from "./trap.js";
+
 export default class TrapsController {
   TRAP_INTERVAL_MIN = 500;
   TRAP_INTERVAL_MAX = 2000;
@@ -36,6 +38,16 @@ export default class TrapsController {
     const trapImage = this.trapsImages[randomIndex];
     const x = this.canvas.width * 1.5;
     const y = this.canvas.height - trapImage.height;
+    const trap = new Trap(
+      this.context,
+      x,
+      y,
+      trapImage.width,
+      trapImage.height,
+      trapImage.image
+    );
+
+    this.traps.push(trap);
   }
 
   update(gameSpeed, timeDelta) {
@@ -44,7 +56,13 @@ export default class TrapsController {
       this.setNextTrapTime();
     }
     this.nextTrapInterval -= timeDelta;
+
+    this.traps.forEach((trap) => {
+      trap.update(this.speed, gameSpeed, timeDelta, this.scaleRatio);
+    });
   }
 
-  draw() {}
+  draw() {
+    this.traps.forEach((trap) => trap.draw());
+  }
 }
