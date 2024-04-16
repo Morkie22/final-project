@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Ground from "./ground.js";
+import TrapsController from "./trapsController.js";
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
@@ -15,10 +16,16 @@ const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
-const GROUND_AND_CACTUS_SPEED = 0.5;
+const GROUND_AND_TRAPS_SPEED = 0.5;
 
+const TRAPS_CONGIF = [
+  { width: 34 / 1.5, height: 70 / 1.5, image: "../Images/cactus.png" },
+];
+
+// Game Objects
 let player = null;
 let ground = null;
+let trapsController = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -46,8 +53,25 @@ function createSprites() {
     context,
     groundWidthInGame,
     groundHeightInGame,
-    GROUND_AND_CACTUS_SPEED,
+    GROUND_AND_TRAPS_SPEED,
     scaleRatio
+  );
+
+  const trapsImages = TRAPS_CONGIF.map((trap) => {
+    const image = new Image();
+    image.src = trap.image;
+    return {
+      image: image,
+      width: trap.width * scaleRatio,
+      height: trap.height * scaleRatio,
+    };
+  });
+
+  trapsController = new TrapsController(
+    context,
+    trapsImages,
+    scaleRatio,
+    GROUND_AND_TRAPS_SPEED
   );
 }
 
@@ -98,9 +122,11 @@ function update(currentTime) {
   clearCanvas();
 
   ground.update(gameSpeed, timeDelta);
+  trapsController.update(gameSpeed, timeDelta);
   player.update(gameSpeed, timeDelta);
 
   ground.draw();
+  trapsController.draw();
   player.draw();
 
   requestAnimationFrame(update);
