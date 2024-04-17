@@ -1,6 +1,7 @@
 export default class Player {
-  RUN_ANIMATION_FRAMERATE = 200;
-  runAnimationFrameCount = this.RUN_ANIMATION_FRAMERATE;
+  RUN_ANIMATION_FRAMERATE = 50;
+  runAnimationFrameTime = this.RUN_ANIMATION_FRAMERATE;
+  runAnimationFrameIndex = 0;
   playerRunImages = [];
 
   JUMP_SPEED = 0.55;
@@ -24,22 +25,56 @@ export default class Player {
     this.scaleRatio = scaleRatio;
 
     this.x = 10 * scaleRatio;
-    this.y = this.canvas.height - this.height - 1.5 * scaleRatio;
+    this.y = this.canvas.height - this.height - 22 * scaleRatio;
     this.playerStandingPositionY = this.y;
 
     this.isJumping = false;
 
-    this.idleImage = new Image();
-    this.idleImage.src = "./img/player-idle.png";
-    this.image = this.idleImage;
+    // Jumping frames
+    this.jumpImage = new Image();
+    this.jumpImage.src = "./img/jumping/jump_up.png";
+    this.fallImage = new Image();
+    this.fallImage.src = "./img/jumping/fall.png";
 
-    const playerRunImage1 = new Image();
-    playerRunImage1.src = "./img/player-run-0.png";
-    const playerRunImage2 = new Image();
-    playerRunImage2.src = "./img/player-run-1.png";
+    // Running frames
+    const playerRunImage00 = new Image();
+    playerRunImage00.src = "./img/running/run00.png";
+    this.image = playerRunImage00;
+    const playerRunImage01 = new Image();
+    playerRunImage01.src = "./img/running/run01.png";
+    const playerRunImage02 = new Image();
+    playerRunImage02.src = "./img/running/run02.png";
+    const playerRunImage03 = new Image();
+    playerRunImage03.src = "./img/running/run03.png";
+    const playerRunImage04 = new Image();
+    playerRunImage04.src = "./img/running/run04.png";
+    const playerRunImage05 = new Image();
+    playerRunImage05.src = "./img/running/run05.png";
+    const playerRunImage06 = new Image();
+    playerRunImage06.src = "./img/running/run06.png";
+    const playerRunImage07 = new Image();
+    playerRunImage07.src = "./img/running/run07.png";
+    const playerRunImage08 = new Image();
+    playerRunImage08.src = "./img/running/run08.png";
+    const playerRunImage09 = new Image();
+    playerRunImage09.src = "./img/running/run09.png";
+    const playerRunImage10 = new Image();
+    playerRunImage10.src = "./img/running/run10.png";
+    const playerRunImage11 = new Image();
+    playerRunImage11.src = "./img/running/run11.png";
 
-    this.playerRunImages.push(playerRunImage1);
-    this.playerRunImages.push(playerRunImage2);
+    this.playerRunImages.push(playerRunImage00);
+    this.playerRunImages.push(playerRunImage01);
+    this.playerRunImages.push(playerRunImage02);
+    this.playerRunImages.push(playerRunImage03);
+    this.playerRunImages.push(playerRunImage04);
+    this.playerRunImages.push(playerRunImage05);
+    this.playerRunImages.push(playerRunImage06);
+    this.playerRunImages.push(playerRunImage07);
+    this.playerRunImages.push(playerRunImage08);
+    this.playerRunImages.push(playerRunImage09);
+    this.playerRunImages.push(playerRunImage10);
+    this.playerRunImages.push(playerRunImage11);
 
     window.removeEventListener("keydown", this.onJumpKeyDown);
     window.removeEventListener("keyup", this.onJumpKeyUp);
@@ -70,26 +105,26 @@ export default class Player {
     this.handleRun(gameSpeed, timeDelta);
 
     if (this.isJumping) {
-      this.image = this.idleImage;
+      if (this.yVelocity < 0) {
+        this.image = this.fallImage;
+      } else if (this.yVelocity > 0) {
+        this.image = this.jumpImage;
+      }
     }
     this.handleJump(timeDelta);
   }
 
   handleRun(gameSpeed, timeDelta) {
-    if (this.runAnimationFrameCount <= 0) {
-      if (this.image === this.playerRunImages[0]) {
-        this.image = this.playerRunImages[1];
-      } else {
-        this.image = this.playerRunImages[0];
-      }
-      this.runAnimationFrameCount = this.RUN_ANIMATION_FRAMERATE;
+    if (this.runAnimationFrameTime <= 0) {
+      this.image = this.playerRunImages[this.runAnimationFrameIndex++ % 12];
+      this.runAnimationFrameTime = this.RUN_ANIMATION_FRAMERATE;
     }
-    this.runAnimationFrameCount -= timeDelta * gameSpeed;
+    this.runAnimationFrameTime -= timeDelta * gameSpeed;
   }
 
   handleJump(timeDelta) {
     if (!this.isJumping) return;
-    if (this.y + this.height > this.canvas.height) {
+    if (this.y > this.playerStandingPositionY) {
       this.y = this.playerStandingPositionY;
       this.isJumping = false;
       this.yVelocity = 0;
