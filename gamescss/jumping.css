@@ -1,3 +1,19 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+canvas {
+    border: 0.1px solid grey;
+}
+
 .press-start 2p-regular {
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
