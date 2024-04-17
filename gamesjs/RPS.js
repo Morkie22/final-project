@@ -25,7 +25,7 @@ function updateScores() {
 
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', () => {
-        const playerSelection = button.id.charAt(0).toUpperCase() + button.id.slice(1);
+        const playerSelection = button.textContent;
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
         document.getElementById('result').textContent = result;
@@ -39,4 +39,3 @@ document.querySelectorAll('button').forEach(button => {
         }
     });
 });
-

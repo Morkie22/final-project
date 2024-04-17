@@ -23,11 +23,11 @@ button:hover {
     color: white;
 }
 
-#result, #score {
+.result, .score {
     margin-top: 20px;
     font-size: 18px;
 }
 
-#result {
+.result {
     color: #333;
 }

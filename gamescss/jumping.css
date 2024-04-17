@@ -13,3 +13,36 @@ body {
 canvas {
     border: 0.1px solid grey;
 }
+
+.press-start 2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    font-family: "Press Start 2P", system-ui;
+}
+
+body {
+    margin: 20vh auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #535353;
+}
+
+#gameContainer {
+    width: 60vw;
+    height: 30vh;
+    border: 5px solid #C8C8C8;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+#score {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+}
