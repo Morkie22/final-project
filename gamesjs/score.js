@@ -29,7 +29,7 @@ export default class Score {
 
     const fontSize = 20 * this.scaleRatio;
     this.context.font = `${fontSize}px Verdana`;
-    this.context.fillStyle = "grey";
+    this.context.fillStyle = "orange";
     const scorePositionX = this.canvas.width - 100 * this.scaleRatio;
     const highScorePositionX = scorePositionX - 175 * this.scaleRatio;
 
