@@ -25,7 +25,7 @@ export default class Player {
     this.scaleRatio = scaleRatio;
 
     this.x = 10 * scaleRatio;
-    this.y = this.canvas.height - this.height - 1.5 * scaleRatio;
+    this.y = this.canvas.height - this.height - 22 * scaleRatio;
     this.playerStandingPositionY = this.y;
 
     this.isJumping = false;
@@ -121,7 +121,7 @@ export default class Player {
 
   handleJump(timeDelta) {
     if (!this.isJumping) return;
-    if (this.y + this.height > this.canvas.height) {
+    if (this.y > this.playerStandingPositionY) {
       this.y = this.playerStandingPositionY;
       this.isJumping = false;
       this.yVelocity = 0;
