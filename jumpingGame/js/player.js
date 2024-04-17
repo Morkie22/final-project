@@ -30,13 +30,13 @@ export default class Player {
     this.isJumping = false;
 
     this.idleImage = new Image();
-    this.idleImage.src = "../Images/player-idle.png";
+    this.idleImage.src = "./img/player-idle.png";
     this.image = this.idleImage;
 
     const playerRunImage1 = new Image();
-    playerRunImage1.src = "../Images/player-run-0.png";
+    playerRunImage1.src = "./img/player-run-0.png";
     const playerRunImage2 = new Image();
-    playerRunImage2.src = "../Images/player-run-1.png";
+    playerRunImage2.src = "./img/player-run-1.png";
 
     this.playerRunImages.push(playerRunImage1);
     this.playerRunImages.push(playerRunImage2);
