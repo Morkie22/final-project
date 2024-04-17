@@ -1,6 +1,7 @@
 import Player from "./player.js";
 import Ground from "./ground.js";
 import TrapsController from "./trapsController.js";
+import Score from "./score.js";
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
@@ -26,6 +27,7 @@ const TRAPS_CONGIF = [
 let player = null;
 let ground = null;
 let trapsController = null;
+let score = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -76,6 +78,8 @@ function createSprites() {
     scaleRatio,
     GROUND_AND_TRAPS_SPEED
   );
+
+  score = new Score(context, scaleRatio);
 }
 
 function setScreen() {
@@ -146,6 +150,7 @@ function reset() {
   isWaitingToStart = false;
   ground.reset();
   trapsController.reset();
+  score.reset();
   gameSpeed = GAME_SPEED_START;
 }
 
@@ -169,17 +174,20 @@ function update(currentTime) {
     ground.update(gameSpeed, timeDelta);
     trapsController.update(gameSpeed, timeDelta);
     player.update(gameSpeed, timeDelta);
+    score.update(timeDelta);
     increaseGameSpeed(timeDelta);
   }
 
   if (!isGameOver && trapsController.collideWith(player)) {
     isGameOver = true;
     setupGameReset();
+    score.setHighScore();
   }
 
   ground.draw();
   trapsController.draw();
   player.draw();
+  score.draw();
 
   if (isGameOver) {
     showGameOver();
