@@ -23,19 +23,39 @@ function updateScores() {
     document.getElementById('score').textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
 }
 
-document.querySelectorAll('button').forEach(button => {
+function checkGameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        const winner = playerScore === 5 ? 'Player' : 'Computer';
+        document.getElementById('result').textContent = `Game over, ${winner} wins!`;
+        toggleGameButtons(false);
+        document.getElementById('reset').style.display = 'block';
+    }
+}
+
+function toggleGameButtons(enable) {
+    document.querySelectorAll('button').forEach(button => {
+        if (button.id !== 'reset') {
+            button.disabled = !enable;
+        }
+    });
+}
+
+document.querySelectorAll('#rock, #paper, #scissors').forEach(button => {
     button.addEventListener('click', () => {
         const playerSelection = button.textContent;
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
         document.getElementById('result').textContent = result;
         updateScores();
-        if (playerScore === 5 || computerScore === 5) {
-            const winner = playerScore === 5 ? 'Player' : 'Computer';
-            document.getElementById('result').textContent = `Game over, ${winner} wins!`;
-            playerScore = 0;
-            computerScore = 0;
-            updateScores();  // Ensure score resets are reflected in the display
-        }
+        checkGameOver();
     });
+});
+
+document.getElementById('reset').addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    updateScores();
+    document.getElementById('result').textContent = '';
+    toggleGameButtons(true);
+    document.getElementById('reset').style.display = 'none';
 });
