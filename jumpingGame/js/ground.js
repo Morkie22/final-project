@@ -10,8 +10,8 @@ export default class Ground {
     this.x = 0;
     this.y = this.canvas.height - this.height;
 
-    this.grassGroundImage = new Image();
-    this.grassGroundImage.src = "../Images/grassGround.png";
+    this.groundImage = new Image();
+    this.groundImage.src = "../Images/ground.png";
   }
 
   update(gameSpeed, timeDelta) {
@@ -20,7 +20,7 @@ export default class Ground {
 
   draw() {
     this.context.drawImage(
-      this.grassGroundImage,
+      this.groundImage,
       this.x,
       this.y,
       this.width,
@@ -28,7 +28,7 @@ export default class Ground {
     );
 
     this.context.drawImage(
-      this.grassGroundImage,
+      this.groundImage,
       this.x + this.width,
       this.y,
       this.width,

@@ -1,8 +1,6 @@
-import Player from "./player.js";
-import Ground from "./ground.js";
-import TrapsController from "./trapsController.js";
-import Score from "./score.js";
-import Layer from "./bgLayer.js";
+import Player from "./js/player.js";
+import Ground from "./js/ground.js";
+import TrapsController from "./js/trapsController.js";
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
@@ -18,25 +16,16 @@ const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
-const LAYER_WIDTH = 768;
-const LAYER_HEIGHT = 216;
 const GROUND_AND_TRAPS_SPEED = 0.5;
 
 const TRAPS_CONGIF = [
-  { width: 62 / 1.5, height: 63 / 1.5, image: "../Images/traps/trap01.png" },
-  { width: 95 / 1.5, height: 95 / 1.5, image: "../Images/traps/trap02.png" },
+  { width: 34 / 1.5, height: 70 / 1.5, image: "./img/cactus.png" },
 ];
 
 // Game Objects
 let player = null;
 let ground = null;
 let trapsController = null;
-let score = null;
-let layer1 = null;
-let layer2 = null;
-let layer3 = null;
-let layer4 = null;
-let layer5 = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -53,9 +42,6 @@ function createSprites() {
 
   const groundWidthInGame = GROUND_WIDTH * scaleRatio;
   const groundHeightInGame = GROUND_HEIGHT * scaleRatio;
-
-  const layerWidthInGame = LAYER_WIDTH * scaleRatio;
-  const layerHeightInGame = LAYER_HEIGHT * scaleRatio;
 
   player = new Player(
     context,
@@ -89,54 +75,6 @@ function createSprites() {
     trapsImages,
     scaleRatio,
     GROUND_AND_TRAPS_SPEED
-  );
-
-  score = new Score(context, scaleRatio);
-
-  layer1 = new Layer(
-    context,
-    layerWidthInGame,
-    layerHeightInGame,
-    0,
-    0,
-    "../Images/bg/plx-01.png",
-    scaleRatio
-  );
-  layer2 = new Layer(
-    context,
-    layerWidthInGame,
-    layerHeightInGame,
-    GROUND_AND_TRAPS_SPEED * 0.2,
-    0,
-    "../Images/bg/plx-02.png",
-    scaleRatio
-  );
-  layer3 = new Layer(
-    context,
-    layerWidthInGame,
-    layerHeightInGame,
-    GROUND_AND_TRAPS_SPEED * 0.4,
-    0,
-    "../Images/bg/plx-03.png",
-    scaleRatio
-  );
-  layer4 = new Layer(
-    context,
-    layerWidthInGame,
-    layerHeightInGame,
-    GROUND_AND_TRAPS_SPEED * 0.6,
-    0,
-    "../Images/bg/plx-04.png",
-    scaleRatio
-  );
-  layer5 = new Layer(
-    context,
-    layerWidthInGame,
-    layerHeightInGame,
-    GROUND_AND_TRAPS_SPEED * 0.8,
-    0,
-    "../Images/bg/plx-05.png",
-    scaleRatio
   );
 }
 
@@ -177,7 +115,7 @@ function clearCanvas() {
 function showStartScreen() {
   const fontSize = 70 * scaleRatio;
   context.font = `${fontSize}px Verdana`;
-  context.fillStyle = "orange";
+  context.fillStyle = "grey";
   const x = canvas.width / 14;
   const y = canvas.height / 2;
   context.fillText("Press Space to start", x, y);
@@ -186,7 +124,7 @@ function showStartScreen() {
 function showGameOver() {
   const fontSize = 70 * scaleRatio;
   context.font = `${fontSize}px Verdana`;
-  context.fillStyle = "orange";
+  context.fillStyle = "grey";
   const x = canvas.width / 4.5;
   const y = canvas.height / 2;
   context.fillText("Game Over", x, y);
@@ -206,14 +144,8 @@ function reset() {
   hasEventListenersForRestart = false;
   isGameOver = false;
   isWaitingToStart = false;
-  layer1.reset();
-  layer2.reset();
-  layer3.reset();
-  layer4.reset();
-  layer5.reset();
   ground.reset();
   trapsController.reset();
-  score.reset();
   gameSpeed = GAME_SPEED_START;
 }
 
@@ -234,33 +166,23 @@ function update(currentTime) {
   clearCanvas();
 
   if (!isGameOver && !isWaitingToStart) {
-    layer1.update(gameSpeed, timeDelta);
-    layer2.update(gameSpeed, timeDelta);
-    layer3.update(gameSpeed, timeDelta);
-    layer4.update(gameSpeed, timeDelta);
-    layer5.update(gameSpeed, timeDelta);
     ground.update(gameSpeed, timeDelta);
     trapsController.update(gameSpeed, timeDelta);
     player.update(gameSpeed, timeDelta);
-    score.update(timeDelta);
     increaseGameSpeed(timeDelta);
   }
 
   if (!isGameOver && trapsController.collideWith(player)) {
     isGameOver = true;
+    const audio = new Audio();
+    audio.src = "./snd/gameover.mp3";
+    audio.play();
     setupGameReset();
-    score.setHighScore();
   }
 
-  layer1.draw();
-  layer2.draw();
-  layer3.draw();
-  layer4.draw();
-  layer5.draw();
   ground.draw();
   trapsController.draw();
   player.draw();
-  score.draw();
 
   if (isGameOver) {
     showGameOver();
