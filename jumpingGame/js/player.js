@@ -53,6 +53,9 @@ export default class Player {
 
     this.yVelocity = this.JUMP_SPEED;
     this.isJumping = true;
+    const audio = new Audio();
+    audio.src = "./snd/jump.mp3";
+    audio.play();
   };
 
   onJumpKeyUp = (event) => {

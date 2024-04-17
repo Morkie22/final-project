@@ -174,6 +174,9 @@ function update(currentTime) {
 
   if (!isGameOver && trapsController.collideWith(player)) {
     isGameOver = true;
+    const audio = new Audio();
+    audio.src = "./snd/gameover.mp3";
+    audio.play();
     setupGameReset();
   }
 
