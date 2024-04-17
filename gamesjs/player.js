@@ -3,10 +3,6 @@ export default class Player {
   runAnimationFrameCount = this.RUN_ANIMATION_FRAMERATE;
   playerRunImages = [];
 
-  isJumpPressed = false;
-  isJumpInProgress = false;
-  isFalling = false;
-
   JUMP_SPEED = 0.55;
   GRAVITY = 0.0015;
   yVelocity = 0;
@@ -61,7 +57,6 @@ export default class Player {
 
   onJumpKeyUp = (event) => {
     if (event.code === "Space") {
-      this.isJumpPressed = false;
       if (this.yVelocity > 0) {
         this.yVelocity = 0;
       }
@@ -71,7 +66,7 @@ export default class Player {
   update(gameSpeed, timeDelta) {
     this.handleRun(gameSpeed, timeDelta);
 
-    if (this.isJumpInProgress) {
+    if (this.isJumping) {
       this.image = this.idleImage;
     }
     this.handleJump(timeDelta);
