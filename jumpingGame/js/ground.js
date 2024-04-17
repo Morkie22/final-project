@@ -11,7 +11,7 @@ export default class Ground {
     this.y = this.canvas.height - this.height;
 
     this.grassGroundImage = new Image();
-    this.grassGroundImage.src = "../Images/grassGround.png";
+    this.grassGroundImage.src = "./img/bg/grassGround.png";
   }
 
   update(gameSpeed, timeDelta) {

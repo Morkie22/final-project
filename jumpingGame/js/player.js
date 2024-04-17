@@ -32,36 +32,36 @@ export default class Player {
 
     // Jumping frames
     this.jumpImage = new Image();
-    this.jumpImage.src = "../Images/jumping/jump_up.png";
+    this.jumpImage.src = "./img/jumping/jump_up.png";
     this.fallImage = new Image();
-    this.fallImage.src = "../Images/jumping/fall.png";
+    this.fallImage.src = "./img/jumping/fall.png";
 
     // Running frames
     const playerRunImage00 = new Image();
-    playerRunImage00.src = "../Images/running/run00.png";
+    playerRunImage00.src = "./img/running/run00.png";
     this.image = playerRunImage00;
     const playerRunImage01 = new Image();
-    playerRunImage01.src = "../Images/running/run01.png";
+    playerRunImage01.src = "./img/running/run01.png";
     const playerRunImage02 = new Image();
-    playerRunImage02.src = "../Images/running/run02.png";
+    playerRunImage02.src = "./img/running/run02.png";
     const playerRunImage03 = new Image();
-    playerRunImage03.src = "../Images/running/run03.png";
+    playerRunImage03.src = "./img/running/run03.png";
     const playerRunImage04 = new Image();
-    playerRunImage04.src = "../Images/running/run04.png";
+    playerRunImage04.src = "./img/running/run04.png";
     const playerRunImage05 = new Image();
-    playerRunImage05.src = "../Images/running/run05.png";
+    playerRunImage05.src = "./img/running/run05.png";
     const playerRunImage06 = new Image();
-    playerRunImage06.src = "../Images/running/run06.png";
+    playerRunImage06.src = "./img/running/run06.png";
     const playerRunImage07 = new Image();
-    playerRunImage07.src = "../Images/running/run07.png";
+    playerRunImage07.src = "./img/running/run07.png";
     const playerRunImage08 = new Image();
-    playerRunImage08.src = "../Images/running/run08.png";
+    playerRunImage08.src = "./img/running/run08.png";
     const playerRunImage09 = new Image();
-    playerRunImage09.src = "../Images/running/run09.png";
+    playerRunImage09.src = "./img/running/run09.png";
     const playerRunImage10 = new Image();
-    playerRunImage10.src = "../Images/running/run10.png";
+    playerRunImage10.src = "./img/running/run10.png";
     const playerRunImage11 = new Image();
-    playerRunImage11.src = "../Images/running/run11.png";
+    playerRunImage11.src = "./img/running/run11.png";
 
     this.playerRunImages.push(playerRunImage00);
     this.playerRunImages.push(playerRunImage01);
