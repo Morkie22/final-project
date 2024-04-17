@@ -1,36 +1,22 @@
 * {
     padding: 0px;
-    margin: 0px;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-canvas {
-    border: 0.1px solid grey;
-}
-
-.press-start 2p-regular {
+    margin: 0;
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
 }
 
-* {
-    margin: 0;
-    font-family: "Press Start 2P", system-ui;
-}
-
 body {
-    margin: 20vh auto 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #535353;
+    height: 100vh;
+    color: #535353;
+}
+
+canvas {
+    border: 0.1px solid grey;
 }
 
 #gameContainer {
@@ -45,4 +31,17 @@ body {
     position: absolute;
     top: 50px;
     right: 100px;
+}
+
+h3 {
+    margin: 25px auto;
+}
+
+p, li {
+    line-height: 1.6;
+    font-size: 0.8em;
+}
+
+p {
+    margin: 50px 300px;
 }
