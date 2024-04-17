@@ -75,17 +75,6 @@ export default class Player {
     this.playerRunImages.push(playerRunImage09);
     this.playerRunImages.push(playerRunImage10);
     this.playerRunImages.push(playerRunImage11);
-    this.idleImage = new Image();
-    this.idleImage.src = "./img/player-idle.png";
-    this.image = this.idleImage;
-
-    const playerRunImage1 = new Image();
-    playerRunImage1.src = "./img/player-run-0.png";
-    const playerRunImage2 = new Image();
-    playerRunImage2.src = "./img/player-run-1.png";
-
-    this.playerRunImages.push(playerRunImage1);
-    this.playerRunImages.push(playerRunImage2);
 
     window.removeEventListener("keydown", this.onJumpKeyDown);
     window.removeEventListener("keyup", this.onJumpKeyUp);
