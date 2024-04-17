@@ -17,7 +17,7 @@ export default class Trap {
   }
 
   collideWith(sprite) {
-    const adjustBy = 1.4;
+    const adjustBy = 1.3;
     if (
       sprite.x < this.x + this.width / adjustBy &&
       sprite.x + sprite.width / adjustBy > this.x &&

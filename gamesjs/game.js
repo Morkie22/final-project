@@ -20,7 +20,8 @@ const GROUND_HEIGHT = 24;
 const GROUND_AND_TRAPS_SPEED = 0.5;
 
 const TRAPS_CONGIF = [
-  { width: 34 / 1.5, height: 70 / 1.5, image: "../Images/cactus.png" },
+  { width: 62 / 1.5, height: 63 / 1.5, image: "../Images/traps/trap01.png" },
+  { width: 95 / 1.5, height: 95 / 1.5, image: "../Images/traps/trap02.png" },
 ];
 
 // Game Objects

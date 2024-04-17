@@ -37,7 +37,7 @@ export default class TrapsController {
     );
     const trapImage = this.trapsImages[randomIndex];
     const x = this.canvas.width * 1.5;
-    const y = this.canvas.height - trapImage.height;
+    const y = this.canvas.height - trapImage.height - 48;
     const trap = new Trap(
       this.context,
       x,
