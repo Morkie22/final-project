@@ -149,6 +149,10 @@ function reset() {
   gameSpeed = GAME_SPEED_START;
 }
 
+function increaseGameSpeed(timeDelta) {
+  gameSpeed += timeDelta * GAME_SPEED_INCREMENT;
+}
+
 function update(currentTime) {
   if (previousTime === null) {
     previousTime = currentTime;
@@ -165,6 +169,7 @@ function update(currentTime) {
     ground.update(gameSpeed, timeDelta);
     trapsController.update(gameSpeed, timeDelta);
     player.update(gameSpeed, timeDelta);
+    increaseGameSpeed(timeDelta);
   }
 
   if (!isGameOver && trapsController.collideWith(player)) {
