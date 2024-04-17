@@ -32,6 +32,7 @@ let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
 let isGameOver = false;
 let hasEventListenersForRestart = false;
+let isWaitingToStart = true;
 
 function createSprites() {
   const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
@@ -111,6 +112,15 @@ function clearCanvas() {
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function showStartScreen() {
+  const fontSize = 70 * scaleRatio;
+  context.font = `${fontSize}px Verdana`;
+  context.fillStyle = "grey";
+  const x = canvas.width / 14;
+  const y = canvas.height / 2;
+  context.fillText("Press Space to start", x, y);
+}
+
 function showGameOver() {
   const fontSize = 70 * scaleRatio;
   context.font = `${fontSize}px Verdana`;
@@ -133,6 +143,7 @@ function setupGameReset() {
 function reset() {
   hasEventListenersForRestart = false;
   isGameOver = false;
+  isWaitingToStart = false;
   ground.reset();
   trapsController.reset();
   gameSpeed = GAME_SPEED_START;
@@ -150,7 +161,7 @@ function update(currentTime) {
 
   clearCanvas();
 
-  if (!isGameOver) {
+  if (!isGameOver && !isWaitingToStart) {
     ground.update(gameSpeed, timeDelta);
     trapsController.update(gameSpeed, timeDelta);
     player.update(gameSpeed, timeDelta);
@@ -169,7 +180,13 @@ function update(currentTime) {
     showGameOver();
   }
 
+  if (isWaitingToStart) {
+    showStartScreen();
+  }
+
   requestAnimationFrame(update);
 }
 
 requestAnimationFrame(update);
+
+window.addEventListener("keyup", reset, { once: true });
