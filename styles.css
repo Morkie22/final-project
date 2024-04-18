@@ -43,12 +43,12 @@ nav {
 
 /* Button styling */
 nav a {
-    display: inline-block; /* Display as block to center content */
     width: 20vw;
     font-size: 1.5em;
     background-color: #3498db;
     color: #f4f4f9;
     padding: 15px 0;
+    text-align: center; /* Align text in the center */
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.2s ease-in-out;
