@@ -11,10 +11,19 @@ function updateDisplay() {
 function pressNum(num) {
     if (num === '.' && displayValue.includes('.') && !awaitingNewNumber) return;
     if (awaitingNewNumber) {
+        if (num === '-') return;
         displayValue = num !== '.' ? num : '0.';
         awaitingNewNumber = false;
     } else {
-        displayValue += num;
+        if (num === '-') {
+            if (displayValue.includes('-')) {
+                displayValue = displayValue.replace('-', '');
+            } else {
+                displayValue = `-${displayValue}`;
+            }
+        } else {
+            displayValue += num;
+        }
     }
     updateDisplay();
 }
@@ -56,9 +65,21 @@ function clearDisplay() {
     awaitingNewNumber = true;
     updateDisplay();
 }
+function backspace () {
+    let array = displayValue.split("");
+    if (array.length == 1 || array.length == 2 && displayValue.includes('-')) {
+        displayValue = '0';
+        awaitingNewNumber = true;
+    } else {
+        array.length--;
+        displayValue = array.join("");
+    }
+    updateDisplay();
+}
 document.addEventListener('keydown', function(e) {
     if ((e.key >= '0' && e.key <= '9') || e.key === '.') pressNum(e.key);
     if (e.key === 'Enter' || e.key === '=') operate();
+    if (e.key === 'Backspace') backspace();
     if (e.key === 'Escape' || e.key === 'Delete') clearDisplay();
     if (['+', '-', '*', '/'].includes(e.key)) setOperation(e.key);
 });

@@ -12,8 +12,9 @@
         <header id="display">0</header>
         <section class="button-section">
             <button class="clearBtn" onclick="clearDisplay()">C</button>
-            <button class="backBtn" onclick="setOperation('')">B</button>
-            <button class="mathBtn topBtn" onclick="setOperation('/')">÷</button>
+            <button class="backBtn" onclick="backspace()"><img src="./img/backspace.png" alt="backspace icon"></button>
+            <button onclick="pressNum('-')">+/-</button>
+            <button class="mathBtn" onclick="setOperation('/')">÷</button>
         </section>
         <section class="button-section">
             <button onclick="pressNum('7')">7</button>
@@ -34,7 +35,6 @@
             <button class="mathBtn" onclick="setOperation('+')">+</button>
         </section>
         <section class="button-section">
-            <button onclick="pressNum('-')">+/-</button>
             <button onclick="pressNum('0')">0</button>
             <button onclick="pressNum('.')">.</button>
             <button class="opBtn" onclick="operate()">=</button>
