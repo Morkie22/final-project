@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9f7f7; /* Light gray background */
+    background: linear-gradient(to bottom, #f7f7f7, #f7f7f7 50%, #ededed 50%, #ededed); /* T-Rex game background gradient */
 }
 
 /* Header styling */
@@ -24,7 +24,7 @@ header {
 h1 {
     color: #2c3e50;
     margin-bottom: 20px;
-    font-size: 2.5em; /* Increased font size */
+    font-size: 2.5em;
 }
 
 /* Main content styling */
@@ -49,8 +49,8 @@ nav a {
     width: 50%;
     max-width: 300px;
     font-size: 1.5em;
-    background-color: #4CAF50; /* Green button background */
-    color: #ffffff; /* White text */
+    background-color: #4CAF50;
+    color: #ffffff;
     padding: 15px 0;
     text-align: center;
     text-decoration: none;
@@ -61,23 +61,23 @@ nav a {
 
 /* Hover and active styles for buttons */
 nav a:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
     transform: scale(1.05);
 }
 
 nav a:active {
-    background-color: #386e3c; /* Even darker green when active */
+    background-color: #386e3c;
     transform: scale(0.95);
 }
 
 /* Paragraph below title */
 main p {
     margin-bottom: 30px;
-    color: #555; /* Dark gray text */
-    font-size: 1.2em; /* Increased font size */
+    color: #555;
+    font-size: 1.2em;
 }
 
 /* Additional hover effect for paragraph */
 main p:hover {
-    color: #333; /* Darker text on hover */
+    color: #333;
 }
