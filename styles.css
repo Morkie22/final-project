@@ -8,8 +8,8 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 
@@ -22,12 +22,13 @@ header {
 /* Heading styling */
 h1 {
     color: #2c3e50;
-    margin-bottom: 20px; /* Added margin bottom */
+    margin-bottom: 20px;
 }
 
 /* Main content styling */
 main {
     text-align: center;
+    width: 100%;
 }
 
 /* Navigation styling */
@@ -43,8 +44,8 @@ nav {
 
 /* Button styling */
 nav a {
-    max-width: 80%; /* Adjusted to maximum width */
-    width: 100%; /* Ensures button takes full width */
+    width: 50%;
+    max-width: 300px;
     font-size: 1.5em;
     background-color: #3498db;
     color: #f4f4f9;
@@ -70,5 +71,5 @@ nav a:active {
 
 /* Paragraph below title */
 main p {
-    margin-bottom: 30px; /* Added margin bottom */
+    margin-bottom: 30px;
 }
