@@ -22,6 +22,7 @@ header {
 /* Heading styling */
 h1 {
     color: #2c3e50;
+    margin-bottom: 20px; /* Added margin bottom */
 }
 
 /* Main content styling */
@@ -40,7 +41,9 @@ nav {
     margin-top: 30px;
 }
 
+/* Button styling */
 nav a {
+    display: inline-block; /* Display as block to center content */
     width: 20vw;
     font-size: 1.5em;
     background-color: #3498db;
@@ -52,6 +55,7 @@ nav a {
     cursor: pointer;
 }
 
+/* Hover and active styles for buttons */
 nav a:hover {
     background-color: #2980b9;
     transform: scale(1.05);
@@ -61,4 +65,9 @@ nav a:active {
     background-color: #2c3e50;
     color: #f4f4f9;
     transform: scale(0.95);
+}
+
+/* Paragraph below title */
+main p {
+    margin-bottom: 30px; /* Added margin bottom */
 }
