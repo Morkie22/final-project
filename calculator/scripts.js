@@ -11,10 +11,19 @@ function updateDisplay() {
 function pressNum(num) {
     if (num === '.' && displayValue.includes('.') && !awaitingNewNumber) return;
     if (awaitingNewNumber) {
+        if (num === '-') return;
         displayValue = num !== '.' ? num : '0.';
         awaitingNewNumber = false;
     } else {
-        displayValue += num;
+        if (num === '-') {
+            if (displayValue.includes('-')) {
+                displayValue = displayValue.replace('-', '');
+            } else {
+                displayValue = `-${displayValue}`;
+            }
+        } else {
+            displayValue += num;
+        }
     }
     updateDisplay();
 }
@@ -58,7 +67,7 @@ function clearDisplay() {
 }
 function backspace () {
     let array = displayValue.split("");
-    if (array.length == 1) {
+    if (array.length == 1 || array.length == 2 && displayValue.includes('-')) {
         displayValue = '0';
         awaitingNewNumber = true;
     } else {
