@@ -41,19 +41,29 @@ button {
     background-color: #f0f0f0;
     font-size: 1.2em;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 button:hover {
     background-color: #dcdcdc;
 }
 
+button:active {
+    color: #e0e0e0;
+    background-color: green;
+    box-shadow: 0 5px #dcdcdc;
+    transform: translateY(2px);
+}
+
+.backBtn img {
+    padding-top: 5px;
+    width: 30%;
+}
+
 .clearBtn {
     color: red;
     font-weight: bold;
 }
-
-.backBtn {}
 
 .topBtn {
     margin-left: auto;
@@ -73,4 +83,11 @@ button:hover {
 .opBtn:hover {
     color: #0067C0;
     background-color: #e0e0e0;
+}
+
+.opBtn:active {
+    color: #e0e0e0;
+    background-color: green;
+    box-shadow: 0 5px #dcdcdc;
+    transform: translateY(2px);
 }
