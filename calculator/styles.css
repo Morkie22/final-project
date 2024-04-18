@@ -79,13 +79,13 @@ button:active {
     font-weight: bold;
 }
 
-.topBtn {
-    margin-left: auto;
-}
-
 .mathBtn {
     color: #0067C0;
     font-size: 1.7em;
+}
+
+button:nth-child(1) {
+    flex-grow: 2;
 }
 
 .opBtn {
