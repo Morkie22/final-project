@@ -56,9 +56,21 @@ function clearDisplay() {
     awaitingNewNumber = true;
     updateDisplay();
 }
+function backspace () {
+    let array = displayValue.split("");
+    if (array.length == 1) {
+        displayValue = '0';
+        awaitingNewNumber = true;
+    } else {
+        array.length--;
+        displayValue = array.join("");
+    }
+    updateDisplay();
+}
 document.addEventListener('keydown', function(e) {
     if ((e.key >= '0' && e.key <= '9') || e.key === '.') pressNum(e.key);
     if (e.key === 'Enter' || e.key === '=') operate();
+    if (e.key === 'Backspace') backspace();
     if (e.key === 'Escape' || e.key === 'Delete') clearDisplay();
     if (['+', '-', '*', '/'].includes(e.key)) setOperation(e.key);
 });
