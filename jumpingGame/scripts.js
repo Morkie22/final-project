@@ -252,6 +252,7 @@ function update(currentTime) {
     audio.src = "./snd/gameover.mp3";
     audio.play();
     setupGameReset();
+    score.setHighScore();
   }
 
   layer1.draw();
