@@ -4,10 +4,12 @@ let secondOperand = null;
 let currentOperation = null;
 let awaitingNewNumber = true;
 
-// Function to update the calculator display
+const displayElement = document.querySelector('#display');
+
 function updateDisplay() {
-    document.querySelector('#display').textContent = displayValue;
+    displayElement.textContent = displayValue;
 }
+
 function pressNum(num) {
     if (num === '.' && displayValue.includes('.') && !awaitingNewNumber) return;
     if (awaitingNewNumber) {
@@ -27,27 +29,31 @@ function pressNum(num) {
     }
     updateDisplay();
 }
+
 function setOperation(operator) {
     if (currentOperation && !awaitingNewNumber) {
         operate();
     }
     firstOperand = parseFloat(displayValue);
     currentOperation = operator;
-    awaitingNewNumber = true; // Ready for next number
+    awaitingNewNumber = true; 
 }
+
 function operate() {
     if (!currentOperation || awaitingNewNumber) return;
     secondOperand = parseFloat(displayValue);
     if (currentOperation === '/' && secondOperand === 0) {
         displayValue = "Error: Divide by zero";
-    } else {
-        displayValue = performCalculation(firstOperand, secondOperand, currentOperation).toString();
+        updateDisplay();
+        return;
     }
+    displayValue = performCalculation(firstOperand, secondOperand, currentOperation).toString();
     updateDisplay();
     firstOperand = parseFloat(displayValue);
     currentOperation = null;
     awaitingNewNumber = true; 
 }
+
 function performCalculation(a, b, operation) {
     switch (operation) {
         case '+': return a + b;
@@ -57,14 +63,16 @@ function performCalculation(a, b, operation) {
         default: return b;
     }
 }
+
 function clearDisplay() {
     displayValue = '0';
     firstOperand = null;
     currentOperation = null;
     secondOperand = null;
-    awaitingNewNumber = true;
+    awaitingNewNumber = true; 
     updateDisplay();
 }
+
 function backspace () {
     let array = displayValue.split("");
     if (array.length == 1 || array.length == 2 && displayValue.includes('-')) {
@@ -76,6 +84,7 @@ function backspace () {
     }
     updateDisplay();
 }
+
 document.addEventListener('keydown', function(e) {
     if ((e.key >= '0' && e.key <= '9') || e.key === '.') pressNum(e.key);
     if (e.key === 'Enter' || e.key === '=') operate();
