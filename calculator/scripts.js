@@ -41,6 +41,7 @@ function setOperation(operator) {
 
 function operate() {
     if (!currentOperation || awaitingNewNumber) return;
+    if (displayValue.includes("Error")) return;
     secondOperand = parseFloat(displayValue);
     if (currentOperation === '/' && secondOperand === 0) {
         displayValue = "Error: Divide by zero";
@@ -73,7 +74,7 @@ function clearDisplay() {
     updateDisplay();
 }
 
-function backspace () {
+function backspace() {
     let array = displayValue.split("");
     if (array.length == 1 || array.length == 2 && displayValue.includes('-')) {
         displayValue = '0';
