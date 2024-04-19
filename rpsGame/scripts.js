@@ -39,13 +39,15 @@ function checkGameOver() {
 
 // Function to toggle game buttons' availability
 function toggleGameButtons(enable) {
-    document.querySelectorAll('button.choice').forEach(button => {
-        button.disabled = !enable;
+    document.querySelectorAll('button').forEach(button => {
+        if (button.id !== 'reset') {
+            button.disabled = !enable;
+        }
     });
 }
 
 // Event listeners for player's choices
-document.querySelectorAll('button.choice').forEach(button => {
+document.querySelectorAll('#rock, #paper, #scissors').forEach(button => {
     button.addEventListener('click', () => {
         const playerSelection = button.textContent;
         const computerSelection = computerPlay();
