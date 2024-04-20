@@ -175,8 +175,9 @@ function clearCanvas() {
 }
 
 function showStartScreen() {
-  const fontSize = 70 * scaleRatio;
-  context.font = `${fontSize}px Verdana`;
+  const fontSize = 35 * scaleRatio;
+  const fontFamily = '"Press Start 2P", system-ui';
+  context.font = `${fontSize}px ${fontFamily}`;
   context.fillStyle = "orange";
   const x = canvas.width / 14;
   const y = canvas.height / 2;
@@ -184,8 +185,9 @@ function showStartScreen() {
 }
 
 function showGameOver() {
-  const fontSize = 70 * scaleRatio;
-  context.font = `${fontSize}px Verdana`;
+  const fontSize = 50 * scaleRatio;
+  const fontFamily = '"Press Start 2P", system-ui';
+  context.font = `${fontSize}px ${fontFamily}`;
   context.fillStyle = "orange";
   const x = canvas.width / 4.5;
   const y = canvas.height / 2;
