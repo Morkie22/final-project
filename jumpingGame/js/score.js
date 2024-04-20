@@ -27,8 +27,9 @@ export default class Score {
     const highScore = Number(localStorage.getItem(this.HIGH_SCORE_STRING));
     const positionY = 20 * this.scaleRatio;
 
-    const fontSize = 20 * this.scaleRatio;
-    this.context.font = `${fontSize}px Verdana`;
+    const fontSize = 14 * this.scaleRatio;
+    const fontFamily = '"Press Start 2P", system-ui';
+    this.context.font = `${fontSize}px ${fontFamily}`;
     this.context.fillStyle = "orange";
     const scorePositionX = this.canvas.width - 100 * this.scaleRatio;
     const highScorePositionX = scorePositionX - 175 * this.scaleRatio;

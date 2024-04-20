@@ -43,5 +43,21 @@ p, li {
 }
 
 p {
-    margin: 50px 300px;
+    margin: 2rem 15rem;
+}
+
+@media screen and (max-width: 1024px) {
+    h1{
+        margin: 0 2em;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    p {
+        margin: 2rem 1em;
+    }
+
+    li {
+        margin: 0 5em;
+    }
 }

@@ -48,7 +48,12 @@ function operate() {
         updateDisplay();
         return;
     }
-    displayValue = performCalculation(firstOperand, secondOperand, currentOperation).toString();
+    displayValue = performCalculation(firstOperand, secondOperand, currentOperation);
+    if (Number.isInteger(displayValue)) {
+        displayValue = displayValue.toString();
+    } else {
+        displayValue = displayValue.toFixed(2);
+    }
     updateDisplay();
     firstOperand = parseFloat(displayValue);
     currentOperation = null;
@@ -75,13 +80,13 @@ function clearDisplay() {
 }
 
 function backspace() {
-    let array = displayValue.split("");
+    let array = displayValue.split('');
     if (array.length == 1 || array.length == 2 && displayValue.includes('-')) {
         displayValue = '0';
         awaitingNewNumber = true;
     } else {
         array.length--;
-        displayValue = array.join("");
+        displayValue = array.join('');
     }
     updateDisplay();
 }
