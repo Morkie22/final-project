@@ -49,7 +49,11 @@ function operate() {
         return;
     }
     displayValue = performCalculation(firstOperand, secondOperand, currentOperation);
-    displayValue = displayValue.toFixed(2);
+    if (Number.isInteger(displayValue)) {
+        displayValue = displayValue.toString();
+    } else {
+        displayValue = displayValue.toFixed(2);
+    }
     updateDisplay();
     firstOperand = parseFloat(displayValue);
     currentOperation = null;
