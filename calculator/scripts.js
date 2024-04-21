@@ -39,6 +39,15 @@ function setOperation(operator) {
     awaitingNewNumber = true; 
 }
 
+function verifyDecimals () {
+    let array = displayValue.split('.');
+    let decimalNumbers = array.length > 1 ? array[1].split('') : ['']; 
+    if (decimalNumbers.length > 1) {
+        let decNum = Number.parseFloat(displayValue);
+        displayValue = decNum.toFixed(2);
+    }
+}
+
 function operate() {
     if (!currentOperation || awaitingNewNumber) return;
     if (displayValue.includes("Error")) return;
@@ -48,12 +57,8 @@ function operate() {
         updateDisplay();
         return;
     }
-    displayValue = performCalculation(firstOperand, secondOperand, currentOperation);
-    if (Number.isInteger(displayValue)) {
-        displayValue = displayValue.toString();
-    } else {
-        displayValue = displayValue.toFixed(2);
-    }
+    displayValue = performCalculation(firstOperand, secondOperand, currentOperation).toString();
+    verifyDecimals();
     updateDisplay();
     firstOperand = parseFloat(displayValue);
     currentOperation = null;
